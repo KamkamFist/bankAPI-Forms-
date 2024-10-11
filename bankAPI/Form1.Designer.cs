@@ -114,7 +114,6 @@
             AccountNumerTextBox.Name = "AccountNumerTextBox";
             AccountNumerTextBox.Size = new Size(175, 23);
             AccountNumerTextBox.TabIndex = 2;
-            AccountNumerTextBox.TextChanged += xd_TextChanged;
             // 
             // AccountNameTextBox
             // 

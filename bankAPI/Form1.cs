@@ -26,13 +26,8 @@ namespace bankAPI
             Account account = JsonConvert.DeserializeObject<Account>(json);//pamietaj zainstalowac Newtonsoft.Json
             AccountNumerTextBox.Text = account.accountNo;
             AccountNameTextBox.Text = account.name.ToString();
-            AccountAmountTextBox.Text = account.amount.ToString();   
-
-
-        }
-
-        private void xd_TextChanged(object sender, EventArgs e)
-        {
+            AccountAmountTextBox.Text = account.amount.ToString();
+            //wyœwietlamy dane w textboxach
 
         }
     }
