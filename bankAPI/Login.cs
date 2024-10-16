@@ -1,0 +1,165 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace bankAPI
+{
+    public partial class Login : Form
+    {
+        public Login()
+        {
+            InitializeComponent();
+        }
+
+        private TableLayoutPanel tableLayoutPanel1;
+
+        private void InitializeComponent()
+        {
+            tableLayoutPanel1 = new TableLayoutPanel();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            ExitButton = new Button();
+            LoginButton = new Button();
+            tableLayoutPanel1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.Controls.Add(textBox1, 1, 1);
+            tableLayoutPanel1.Controls.Add(textBox2, 1, 2);
+            tableLayoutPanel1.Controls.Add(label1, 0, 1);
+            tableLayoutPanel1.Controls.Add(label2, 0, 2);
+            tableLayoutPanel1.Controls.Add(label3, 0, 0);
+            tableLayoutPanel1.Controls.Add(ExitButton, 1, 3);
+            tableLayoutPanel1.Controls.Add(LoginButton, 0, 3);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 4;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.Size = new Size(860, 520);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            textBox1.Dock = DockStyle.Fill;
+            textBox1.Location = new Point(433, 133);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(424, 23);
+            textBox1.TabIndex = 0;
+            // 
+            // textBox2
+            // 
+            textBox2.Dock = DockStyle.Fill;
+            textBox2.Location = new Point(433, 263);
+            textBox2.Name = "textBox2";
+            textBox2.PasswordChar = '*';
+            textBox2.Size = new Size(424, 23);
+            textBox2.TabIndex = 1;
+            textBox2.UseSystemPasswordChar = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label1.Location = new Point(3, 130);
+            label1.Name = "label1";
+            label1.Size = new Size(424, 130);
+            label1.TabIndex = 2;
+            label1.Text = "E-mail: ";
+            label1.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Dock = DockStyle.Fill;
+            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label2.Location = new Point(3, 260);
+            label2.Name = "label2";
+            label2.Size = new Size(424, 130);
+            label2.TabIndex = 3;
+            label2.Text = "Hasło: ";
+            label2.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            tableLayoutPanel1.SetColumnSpan(label3, 2);
+            label3.Dock = DockStyle.Fill;
+            label3.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            label3.Location = new Point(3, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(854, 130);
+            label3.TabIndex = 4;
+            label3.Text = "Logowanie";
+            label3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // ExitButton
+            // 
+            ExitButton.Dock = DockStyle.Fill;
+            ExitButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            ExitButton.Location = new Point(433, 393);
+            ExitButton.Name = "ExitButton";
+            ExitButton.Size = new Size(424, 124);
+            ExitButton.TabIndex = 6;
+            ExitButton.Text = "Wyjdź";
+            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.Click += ExitButtonPressed;
+            // 
+            // LoginButton
+            // 
+            LoginButton.Dock = DockStyle.Fill;
+            LoginButton.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 238);
+            LoginButton.Location = new Point(3, 393);
+            LoginButton.Name = "LoginButton";
+            LoginButton.Size = new Size(424, 124);
+            LoginButton.TabIndex = 5;
+            LoginButton.Text = "Zaloguj";
+            LoginButton.UseVisualStyleBackColor = true;
+            LoginButton.Click += LoginButtonPressed;
+            // 
+            // Login
+            // 
+            ClientSize = new Size(860, 520);
+            Controls.Add(tableLayoutPanel1);
+            Name = "Login";
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ResumeLayout(false);
+        }
+
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Button ExitButton;
+        private Button LoginButton;
+
+        private void LoginButtonPressed(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK;
+        }
+
+        private void ExitButtonPressed(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}

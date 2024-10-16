@@ -30,5 +30,19 @@ namespace bankAPI
             //wyœwietlamy dane w textboxach
 
         }
+
+        private void OnAppLoad(object sender, EventArgs e)
+        {
+            Login loginForm = new Login();
+            if(loginForm.ShowDialog(this) == DialogResult.OK)
+            {
+                this.Show();
+            }
+            else
+            {
+                Application.Exit();
+            }   
+
+        }
     }
 }

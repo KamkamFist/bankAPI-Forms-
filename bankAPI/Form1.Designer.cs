@@ -135,13 +135,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(333, 161);
             Controls.Add(AccountDetailGroupBox);
             Controls.Add(GetAccountButton);
             Controls.Add(label1);
             Controls.Add(AccountNoTextBox);
             Name = "Form1";
             Text = "Form1";
+            Load += OnAppLoad;
             AccountDetailGroupBox.ResumeLayout(false);
             AccountDetailGroupBox.PerformLayout();
             ResumeLayout(false);
