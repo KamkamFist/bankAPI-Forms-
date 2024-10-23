@@ -4,9 +4,17 @@ namespace bankAPI
 {
     public partial class Form1 : Form
     {
+
+        public string token;
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        public void setToken(Token t)
+        {
+            this.token = t;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,16 +41,17 @@ namespace bankAPI
 
         private void OnAppLoad(object sender, EventArgs e)
         {
-            Login loginForm = new Login();
-            if(loginForm.ShowDialog(this) == DialogResult.OK)
+            Login loginForm = new Login(this);
+            if (loginForm.ShowDialog(this) == DialogResult.OK)
             {
+                //je?li zalogowano poprawnie to poka? formularz
                 this.Show();
             }
             else
             {
+                //je?li nie to zamknij aplikacj?
                 Application.Exit();
-            }   
-
+            }
         }
     }
 }

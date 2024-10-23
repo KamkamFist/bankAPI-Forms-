@@ -1,20 +1,27 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace bankAPI
 {
+
+     
     public partial class Login : Form
     {
-        public Login()
+        Form1 MainForm;
+        public Login(Form1 mainForm)
         {
+            MainForm = p;
             InitializeComponent();
+            MainForm = mainForm;
         }
 
         private TableLayoutPanel tableLayoutPanel1;
@@ -22,8 +29,8 @@ namespace bankAPI
         private void InitializeComponent()
         {
             tableLayoutPanel1 = new TableLayoutPanel();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            LoginTextBox = new TextBox();
+            PasswordTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -37,8 +44,8 @@ namespace bankAPI
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(textBox1, 1, 1);
-            tableLayoutPanel1.Controls.Add(textBox2, 1, 2);
+            tableLayoutPanel1.Controls.Add(LoginTextBox, 1, 1);
+            tableLayoutPanel1.Controls.Add(PasswordTextBox, 1, 2);
             tableLayoutPanel1.Controls.Add(label1, 0, 1);
             tableLayoutPanel1.Controls.Add(label2, 0, 2);
             tableLayoutPanel1.Controls.Add(label3, 0, 0);
@@ -55,23 +62,23 @@ namespace bankAPI
             tableLayoutPanel1.Size = new Size(860, 520);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // textBox1
+            // LoginTextBox
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(433, 133);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(424, 23);
-            textBox1.TabIndex = 0;
+            LoginTextBox.Anchor = AnchorStyles.None;
+            LoginTextBox.Location = new Point(433, 183);
+            LoginTextBox.Name = "LoginTextBox";
+            LoginTextBox.Size = new Size(424, 23);
+            LoginTextBox.TabIndex = 0;
             // 
-            // textBox2
+            // PasswordTextBox
             // 
-            textBox2.Dock = DockStyle.Fill;
-            textBox2.Location = new Point(433, 263);
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(424, 23);
-            textBox2.TabIndex = 1;
-            textBox2.UseSystemPasswordChar = true;
+            PasswordTextBox.Anchor = AnchorStyles.None;
+            PasswordTextBox.Location = new Point(433, 313);
+            PasswordTextBox.Name = "PasswordTextBox";
+            PasswordTextBox.PasswordChar = '*';
+            PasswordTextBox.Size = new Size(424, 23);
+            PasswordTextBox.TabIndex = 1;
+            PasswordTextBox.UseSystemPasswordChar = true;
             // 
             // label1
             // 
@@ -144,8 +151,8 @@ namespace bankAPI
             ResumeLayout(false);
         }
 
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox LoginTextBox;
+        private TextBox PasswordTextBox;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -154,7 +161,28 @@ namespace bankAPI
 
         private void LoginButtonPressed(object sender, EventArgs e)
         {
+            string login = LoginTextBox.Text;
+            string password = PasswordTextBox.Text;
+
+            HttpClient client = new HttpClient();
+            string url = "http://localhost/BankAPI/account/";
+
+            var data = new
+            {
+                login = login,
+                password = password
+            };
+
+
+            HttpResponseMessage response = client.PostAsJsonAsync(url, data).Result;
+
+            string json = response.Content.ReadAsStringAsync().Result;
+
+            Token token = JsonConvert.DeserializeObject<Token>(json);
+
+            MainForm.token = t.token;
             this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void ExitButtonPressed(object sender, EventArgs e)
