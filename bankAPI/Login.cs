@@ -19,7 +19,6 @@ namespace bankAPI
         Form1 MainForm;
         public Login(Form1 mainForm)
         {
-            MainForm = p;
             InitializeComponent();
             MainForm = mainForm;
         }
@@ -69,6 +68,7 @@ namespace bankAPI
             LoginTextBox.Name = "LoginTextBox";
             LoginTextBox.Size = new Size(424, 23);
             LoginTextBox.TabIndex = 0;
+            LoginTextBox.Text = "jkowalski@teb.pl";
             // 
             // PasswordTextBox
             // 
@@ -78,6 +78,7 @@ namespace bankAPI
             PasswordTextBox.PasswordChar = '*';
             PasswordTextBox.Size = new Size(424, 23);
             PasswordTextBox.TabIndex = 1;
+            PasswordTextBox.Text = "321";
             PasswordTextBox.UseSystemPasswordChar = true;
             // 
             // label1
@@ -165,7 +166,7 @@ namespace bankAPI
             string password = PasswordTextBox.Text;
 
             HttpClient client = new HttpClient();
-            string url = "http://localhost/BankAPI/account/";
+            string url = "http://localhost/BankAPI/login/";
 
             var data = new
             {
@@ -176,11 +177,17 @@ namespace bankAPI
 
             HttpResponseMessage response = client.PostAsJsonAsync(url, data).Result;
 
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                return;
+                MessageBox.Show("Niepoprawne dane logowania");
+            }
+
             string json = response.Content.ReadAsStringAsync().Result;
 
             Token token = JsonConvert.DeserializeObject<Token>(json);
 
-            MainForm.token = t.token;
+            MainForm.token = token.token;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

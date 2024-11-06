@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Net.Http.Json;
 
 namespace bankAPI
 {
@@ -14,7 +15,7 @@ namespace bankAPI
 
         public void setToken(Token t)
         {
-            this.token = t;
+            this.token = t.token;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -22,12 +23,19 @@ namespace bankAPI
 
         }
 
-        private void GetAccountData(object sender, EventArgs e)
+        private void GetAccountData()
         {
             HttpClient client = new HttpClient();
-            string url = "http://localhost/BankAPI/account/";
-            url += AccountNoTextBox.Text;//dopisz numer konta fo adresu
-            HttpResponseMessage response = client.GetAsync(url).Result;
+            string url = "http://localhost/BankAPI/account/details";
+            
+
+            var data = new
+            {
+                token = token
+            };
+
+            HttpResponseMessage response = client.PostAsJsonAsync(url, data).Result;
+
 
             //wyciagamy dane z odpowiedzi w jsonie
             string json = response.Content.ReadAsStringAsync().Result;
@@ -46,6 +54,7 @@ namespace bankAPI
             {
                 //je?li zalogowano poprawnie to poka? formularz
                 this.Show();
+               GetAccountData();
             }
             else
             {

@@ -66,7 +66,6 @@
             GetAccountButton.TabIndex = 2;
             GetAccountButton.Text = "Pobierz dane";
             GetAccountButton.UseVisualStyleBackColor = true;
-            GetAccountButton.Click += GetAccountData;
             // 
             // AccountDetailGroupBox
             // 
