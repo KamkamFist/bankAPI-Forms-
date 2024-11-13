@@ -38,6 +38,7 @@
             AccountNumerTextBox = new TextBox();
             AccountNameTextBox = new TextBox();
             label2 = new Label();
+            OpenTranferButton = new Button();
             AccountDetailGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -130,11 +131,23 @@
             label2.TabIndex = 0;
             label2.Text = "Nazwa rachunku: ";
             // 
+            // OpenTranferButton
+            // 
+            OpenTranferButton.BackgroundImageLayout = ImageLayout.None;
+            OpenTranferButton.Location = new Point(174, 155);
+            OpenTranferButton.Name = "OpenTranferButton";
+            OpenTranferButton.Size = new Size(141, 23);
+            OpenTranferButton.TabIndex = 4;
+            OpenTranferButton.Text = "Nadaj nowy przelew";
+            OpenTranferButton.UseVisualStyleBackColor = true;
+            OpenTranferButton.Click += OpenTranferButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(333, 161);
+            ClientSize = new Size(333, 208);
+            Controls.Add(OpenTranferButton);
             Controls.Add(AccountDetailGroupBox);
             Controls.Add(GetAccountButton);
             Controls.Add(label1);
@@ -160,5 +173,6 @@
         private Label label2;
         private Label label4;
         private TextBox AccountAmountTextBox;
+        private Button OpenTranferButton;
     }
 }

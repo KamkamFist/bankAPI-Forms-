@@ -27,7 +27,7 @@ namespace bankAPI
         {
             HttpClient client = new HttpClient();
             string url = "http://localhost/BankAPI/account/details";
-            
+
 
             var data = new
             {
@@ -54,13 +54,23 @@ namespace bankAPI
             {
                 //je?li zalogowano poprawnie to poka? formularz
                 this.Show();
-               GetAccountData();
+                GetAccountData();
             }
             else
             {
                 //je?li nie to zamknij aplikacj?
                 Application.Exit();
             }
+        }
+
+        private void OpenTranferButton_Click(object sender, EventArgs e)
+        {
+            NewTransfer transferForm = new NewTransfer();
+
+            transferForm.token = token;
+            transferForm.source = AccountNumerTextBox.Text;
+
+            transferForm.ShowDialog();
         }
     }
 }
