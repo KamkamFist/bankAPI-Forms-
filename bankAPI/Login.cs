@@ -166,6 +166,9 @@ namespace bankAPI
             string password = PasswordTextBox.Text;
 
             HttpClient client = new HttpClient();
+
+            LoginRequest loginRequest = new LoginRequest(login, password);
+
             string url = "http://localhost/BankAPI/login/";
 
             var data = new
@@ -181,7 +184,7 @@ namespace bankAPI
             {
                 return;
                 MessageBox.Show("Niepoprawne dane logowania");
-            }
+            }   
 
             string json = response.Content.ReadAsStringAsync().Result;
 
