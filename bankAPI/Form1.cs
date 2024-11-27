@@ -1,3 +1,4 @@
+using BankApp;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
@@ -39,7 +40,9 @@ namespace bankAPI
 
             //wyciagamy dane z odpowiedzi w jsonie
             string json = response.Content.ReadAsStringAsync().Result;
-            Account account = JsonConvert.DeserializeObject<Account>(json);//pamietaj zainstalowac Newtonsoft.Json
+            AccountDetailsResponse accountDetailsResponse =
+                JsonConvert.DeserializeObject<AccountDetailsResponse>(json);
+            Account account = accountDetailsResponse.account;//pamietaj zainstalowac Newtonsoft.Json
             AccountNumerTextBox.Text = account.accountNo;
             AccountNameTextBox.Text = account.name.ToString();
             AccountAmountTextBox.Text = account.amount.ToString();
