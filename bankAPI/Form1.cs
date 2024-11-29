@@ -1,4 +1,4 @@
-using BankApp;
+﻿using BankApp;
 using Newtonsoft.Json;
 using System.Net.Http.Json;
 
@@ -6,8 +6,7 @@ namespace bankAPI
 {
     public partial class Form1 : Form
     {
-
-        public string token;
+        public string token { get; set; } = string.Empty;
 
         public Form1()
         {
@@ -24,44 +23,35 @@ namespace bankAPI
 
         }
 
-        private void GetAccountData()
+        private void GetAccountData(object sender, EventArgs e)
         {
+         
             HttpClient client = new HttpClient();
-            string url = "http://localhost/BankAPI/account/details";
-
-
-            var data = new
-            {
-                token = token
-            };
-
+            string url = "http://localhost/bankAPI/account/details/";
+            var data = new { token = token };
             HttpResponseMessage response = client.PostAsJsonAsync(url, data).Result;
-
-
-            //wyciagamy dane z odpowiedzi w jsonie
             string json = response.Content.ReadAsStringAsync().Result;
             AccountDetailsResponse accountDetailsResponse =
                 JsonConvert.DeserializeObject<AccountDetailsResponse>(json);
-            Account account = accountDetailsResponse.account;//pamietaj zainstalowac Newtonsoft.Json
-            AccountNumerTextBox.Text = account.accountNo;
-            AccountNameTextBox.Text = account.name.ToString();
-            AccountAmountTextBox.Text = account.amount.ToString();
-            //wy�wietlamy dane w textboxach
+            Account account = accountDetailsResponse.account;
 
-        }
+                AccountNumerTextBox.Text = account.accountNo;
+                AccountNameTextBox.Text = account.name.ToString();
+                AccountAmountTextBox.Text = account.amount.ToString();
+                   }
 
         private void OnAppLoad(object sender, EventArgs e)
         {
             Login loginForm = new Login(this);
             if (loginForm.ShowDialog(this) == DialogResult.OK)
             {
-                //je?li zalogowano poprawnie to poka? formularz
+                //jeœli zalogowano poprawnie to poka¿ formularz
                 this.Show();
-                GetAccountData();
+                GetAccountData(sender, e);
             }
             else
             {
-                //je?li nie to zamknij aplikacj?
+                //jeœli nie to zamknij aplikacjê
                 Application.Exit();
             }
         }
