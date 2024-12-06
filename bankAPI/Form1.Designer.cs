@@ -39,6 +39,7 @@
             AccountNameTextBox = new TextBox();
             label2 = new Label();
             OpenTranferButton = new Button();
+            SearchButton = new Button();
             AccountDetailGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -142,11 +143,21 @@
             OpenTranferButton.UseVisualStyleBackColor = true;
             OpenTranferButton.Click += OpenTranferButton_Click;
             // 
+            // SearchButton
+            // 
+            SearchButton.Location = new Point(174, 184);
+            SearchButton.Name = "SearchButton";
+            SearchButton.Size = new Size(141, 23);
+            SearchButton.TabIndex = 5;
+            SearchButton.Text = "Szukaj";
+            SearchButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(333, 208);
+            ClientSize = new Size(333, 217);
+            Controls.Add(SearchButton);
             Controls.Add(OpenTranferButton);
             Controls.Add(AccountDetailGroupBox);
             Controls.Add(GetAccountButton);
@@ -174,5 +185,6 @@
         private Label label4;
         private TextBox AccountAmountTextBox;
         private Button OpenTranferButton;
+        private Button SearchButton;
     }
 }
