@@ -14,6 +14,7 @@ namespace bankAPI
     public partial class NewTransfer : Form
     {
         public string token;
+        public Form1 parent;
         public string source;
         public NewTransfer()
         {
@@ -33,6 +34,11 @@ namespace bankAPI
         {
             string target = TransferTargetTextBox.Text;
             float userAmount = float.Parse(TransferAmountTextBox.Text);
+            if (userAmount <= 0)
+            {
+                MessageBox.Show("Kwota przelewu musi być większa od 0");
+                return;
+            }
             int amount = (int)Math.Round(userAmount * 100);
             var data = new
             {
@@ -51,6 +57,7 @@ namespace bankAPI
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 MessageBox.Show("Przelew wykonany pomyślnie");
+                parent.GetAccountData();
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

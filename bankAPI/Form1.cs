@@ -23,9 +23,9 @@ namespace bankAPI
 
         }
 
-        private void GetAccountData(object sender, EventArgs e)
+        public void GetAccountData()
         {
-         
+
             HttpClient client = new HttpClient();
             string url = "http://localhost/bankAPI/account/details/";
             var data = new { token = token };
@@ -35,10 +35,23 @@ namespace bankAPI
                 JsonConvert.DeserializeObject<AccountDetailsResponse>(json);
             Account account = accountDetailsResponse.account;
 
-                AccountNumerTextBox.Text = account.accountNo;
-                AccountNameTextBox.Text = account.name.ToString();
-                AccountAmountTextBox.Text = account.amount.ToString();
-                   }
+            AccountNumerTextBox.Text = account.accountNo;
+            AccountNameTextBox.Text = account.name.ToString();
+            
+            AccountAmountTextBox.Text = int.Parse(account.amount) / 100f + " PLN";
+        }
+
+        /// <summary>
+        /// Method to get account data from API and fill the form with it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshData(object sender, EventArgs e)
+        {
+            GetAccountData();
+        }
+    
+    
 
         private void OnAppLoad(object sender, EventArgs e)
         {
@@ -47,7 +60,7 @@ namespace bankAPI
             {
                 //jeœli zalogowano poprawnie to poka¿ formularz
                 this.Show();
-                GetAccountData(sender, e);
+                GetAccountData();
             }
             else
             {
@@ -60,7 +73,8 @@ namespace bankAPI
         {
             NewTransfer transferForm = new NewTransfer();
 
-            transferForm.token = token;
+            transferForm.token = token; 
+            transferForm.parent = this;
             transferForm.source = AccountNumerTextBox.Text;
 
             transferForm.ShowDialog();
